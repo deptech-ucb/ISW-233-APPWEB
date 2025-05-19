@@ -1,7 +1,9 @@
 import { TodoItem, TodoList } from "./todoList.js";
 
 const todoList = TodoList.getInstance();
-
+// TODO:
+//  IndexedDB
+// idb - libreria
 export const LocalStorage = {
   load() {
     if (localStorage.getItem("todos")) {
