@@ -7,6 +7,7 @@ export const Router = {
         Router.go(href);
       });
     });
+
     window.addEventListener("popstate", (event) => {
       Router.go(event.state.route, false);
     });
@@ -40,5 +41,6 @@ export const Router = {
     }
 
     window.scrollX = 0;
+    window.scrollY = 0;
   },
 };
