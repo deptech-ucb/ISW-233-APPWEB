@@ -14,10 +14,12 @@ Completar los siguientes ejercicios:
     - Un boton para comprar los productos
   5. Agregar un web component para los restaurantes\
     - Quisiera listar varios restaurantes
+  6. Utilice el storage, LocalStorage, para almacenar los items del usuario que tiene en el carrito. 
+  7. Puede realizar un cache de los primeros items para agilizar la primera carga de la aplicacion.
 
 
 # Ejercicio 6
-Modificar su proyecto personal `portfolio` para que utilice patrones de diseno y web components.
+Modificar su proyecto personal `portfolio` para que utilice patrones de diseno, web components y localstorage.
 
 Fecha de entrega: `Miercoles 28 de mayo del 2025`
 
