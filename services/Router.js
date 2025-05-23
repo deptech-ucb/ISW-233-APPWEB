@@ -20,12 +20,28 @@ const Router = {
     let pageElement = null;
     switch (route) {
       case "/":
-        pageElement = document.createElement("h1");
-        pageElement.textContent = "Home";
+        pageElement = document.createElement("menu-page");
         break;
-      case "/todo":
+      case "/products":
+        pageElement = document.createElement("menu-page");
+        break;
+      case "/restaurants":
         pageElement = document.createElement("h1");
-        pageElement.textContent = "From other page";
+        pageElement.textContent = "Restaurants Page";
+        break;
+      case "/order":
+        pageElement = document.createElement("h1");
+        pageElement.textContent = "Order Page";
+        break;
+      default:
+        if (route.startsWith("/products/")) {
+          pageElement = document.createElement("h2");
+
+          const paramId = route.substring(route.lastIndexOf("/") + 1);
+          pageElement.textContent = "Product detail page: " + String(paramId);
+
+          pageElement.dataset.productId = paramId;
+        }
         break;
     }
     if (pageElement) {
@@ -38,6 +54,7 @@ const Router = {
       }
     }
 
+    window.scrollY = 0;
     window.scrollX = 0;
   },
 };

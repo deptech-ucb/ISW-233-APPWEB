@@ -1,57 +1,24 @@
-import { TodoList, TodoItem } from "./services/todoList.js";
-import { CommandExecutor, Command, Commands } from "./services/command.js";
-import { LocalStorage } from "./services/storage.js";
+import Router from "./services/Router.js";
 
-globalThis.DOM = {};
+import Store from "./services/store.js";
+import { loadData } from "./services/Menu.js";
 
-const DOM = globalThis.DOM;
+import { MenuPage } from "./blocks/menuPage/menuPage.js";
+import ProductItem from "./blocks/productItem/productItem.js";
 
-function renderList() {
-  const todos = TodoList.getInstance();
-  DOM.todoList.innerHTML = "";
-  for (let todo of todos.items) {
-    const listItem = document.createElement("li");
-    listItem.className = "todo-item";
-    listItem.innerHTML = `${todo.text} 
-                <button class="delete-btn">Delete</button>`;
-    listItem.dataset.text = todo.text;
-    DOM.todoList.appendChild(listItem);
-  }
-}
+globalThis.app = {};
 
-document.addEventListener("DOMContentLoaded", () => {
-  DOM.todoList = document.getElementById("todo-list");
-  DOM.addBtn = document.getElementById("add-btn");
-  DOM.todoInput = document.getElementById("todo-input");
+app.store = Store;
+app.router = Router;
 
-  DOM.addBtn.addEventListener("click", () => {
-    const cmd = new Command(Commands.ADD);
-    CommandExecutor.execute(cmd);
-  });
-
-  DOM.todoList.addEventListener("click", (event) => {
-    if (event.target.classList.contains("delete-btn")) {
-      const todo = event.target.parentNode.dataset.text;
-      const cmd = new Command(Commands.DELETE, [todo]);
-      CommandExecutor.execute(cmd);
-    }
-  });
-
-  LocalStorage.load();
-
-  renderList();
-  TodoList.getInstance().addObserver(renderList);
+window.addEventListener("DOMContentLoaded", () => {
+  loadData();
+  app.router.init();
 });
 
-document.addEventListener("keydown", function (event) {
-  if (event.ctrlKey && event.key === "p") {
-    event.preventDefault();
-    const cmd = new Command(Commands.ADD);
-    CommandExecutor.execute(cmd);
-  }
-  if (event.ctrlKey && event.key === "z") {
-    event.preventDefault();
-    const cmd = new Command(Commands.UNDO);
-    CommandExecutor.execute(cmd);
-  }
+window.addEventListener("appcartchange", (event) => {
+  const badge = document.getElementById("badge");
+  const qty = app.store.cart.reduce((acc, item) => acc + item.quantity, 0);
+  badge.textContent = qty;
+  badge.hidden = qty == 0;
 });
