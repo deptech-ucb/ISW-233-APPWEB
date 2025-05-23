@@ -15,6 +15,7 @@ Completar los siguientes ejercicios:
   5. Agregar un web component para los restaurantes\
     - Quisiera listar varios restaurantes
   6. Utilice el storage, LocalStorage, para almacenar los items del usuario que tiene en el carrito. 
+    - Opcional: Utilice indexedDB en lugar de LocalStorage
   7. Puede realizar un cache de los primeros items para agilizar la primera carga de la aplicacion.
 
 
